@@ -38,6 +38,7 @@
         <plugin.staging.version>1.6.7</plugin.staging.version>
         <plugin.surefire.version>2.9</plugin.surefire.version>
         <plugin.findbugs.version>3.0.3</plugin.findbugs.version>
+        <maven.assembly.plugin.version>2.5.4</maven.assembly.plugin.version>
     </properties>
 
 
@@ -125,23 +126,24 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>    <!-- release插件，release脚本中会使用 -->
                     <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
                     <configuration>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <preparationGoals>clean install</preparationGoals>
                     </configuration>
                 </plugin>
-                <!-- <plugin> -->
-                <!-- <groupId>org.springframework.boot</groupId> &lt;!&ndash; sprint
-                    boot构建插件 &ndash;&gt; -->
-                <!-- <artifactId>spring-boot-maven-plugin</artifactId> -->
-                <!-- <executions> -->
-                <!-- <execution> -->
-                <!-- <goals> -->
-                <!-- <goal>repackage</goal> -->
-                <!-- </goals> -->
-                <!-- </execution> -->
-                <!-- </executions> -->
-                <!-- </plugin> -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId> <!-- sprintboot构建插件 -->
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.3.3.RELEASE</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

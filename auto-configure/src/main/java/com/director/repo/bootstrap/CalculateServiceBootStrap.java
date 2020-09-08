@@ -1,0 +1,30 @@
+package com.director.repo.bootstrap;
+
+import com.director.repo.service.CalculateService;
+import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication(scanBasePackages = "com.director.repo.service")
+public class CalculateServiceBootStrap {
+
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context=new SpringApplicationBuilder(CalculateServiceBootStrap.class)
+                .web(WebApplicationType.NONE)
+                .profiles("JDK8")
+                .run(args);
+
+        // CalculateService Bean 是否存在
+        CalculateService calculateService = context.getBean(CalculateService.class);
+
+        System.out.println("calculateService.sum(1...10) : " +
+                calculateService.sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+        // 关闭上下文
+        context.close();
+
+
+
+    }
+}

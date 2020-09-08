@@ -9,7 +9,177 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>auto-configure</artifactId>
+    <artifactId>spring-boot-autoconfigure</artifactId>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${global.jdk.version}</source>
+                    <target>${global.jdk.version}</target>
+                    <encoding>${global.encoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <encoding>${global.encoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>	<!-- 打包插件 -->
+                <version>${maven.assembly.plugin.version}</version><!--$NO-MVN-MAN-VER$ -->
+                <executions>
+                    <execution>
+                        <id>spring-boot-autoconfigure</id>
+                        <phase>package</phase><!-- 绑定到 PACKAGE 生命周期阶段 -->
+                        <goals>
+                            <goal>single</goal><!-- 在 PACKAGE 生命周期阶段仅执行一次 -->
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <finalName>AppAutoConfigure</finalName>	<!-- 服务名称 -->
+                    <descriptors>
+                        <descriptor>src/main/assembly/assembly.xml</descriptor>
+                        <!-- 自定义打包的配置文件 -->
+                    </descriptors>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <!-- 设为 FALSE, 防止 WAR 包名加入 assembly.xml 中的 ID -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <copy file="target/AppAutoConfigure.zip"
+                                      tofile="../target/AppAutoConfigure.zip" />	<!-- 拷贝zip包到项目根目录的target目录 -->
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <!--<plugins>
+            <plugin> 这是一种简单测试使用的打包方法
+                <groupId>org.springframework.boot</groupId> &lt;!&ndash; sprintboot构建插件 &ndash;&gt;
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.director.repo.DiveInSpringBootApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>-->
+    </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+            <!--<activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>-->
+        </profile>
+        <profile>
+            <id>fat</id>
+            <properties>
+                <env>fat</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <properties>
+                <env>uat</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>vuat</id>
+            <properties>
+                <env>vuat</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>pt</id>
+            <properties>
+                <env>pt</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>pro</id>
+            <properties>
+                <env>pro</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+
 
 
 </project>

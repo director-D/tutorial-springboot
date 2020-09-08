@@ -1,0 +1,12 @@
+
+global:
+  apollo-meta:
+
+core:
+  auth:
+    url:
+
+
+job:
+  core:
+    env: stable

@@ -1,0 +1,32 @@
+
+global:
+  log-level: debug
+  apollo-app-id: ${spring.application.name}
+  long-default-range-key: long.type.default.range
+  double-default-range-key: double.type.default.range
+  meta-tag-default-user-key: meta.tag.default.user
+  date-format-key: date.default.format
+  tag-precision-key: tag.precision
+  date-key-list: date.key.list
+  date-time-key-list: date.time.key.list
+  month-day-key-list: month.day.key.list
+  meta-tag-config-limit: meta.tag.config.limit
+  city-list-url: city.list.url
+  school-name-keys: school.name.keys
+  school-area-keys: school.area.keys
+  school-name-url: school.name.url
+  school-area-url: school.area.url
+  city-name-keys: city.name.keys
+  user-groups-cache-expire: 60
+  default-tag-map:
+    - name: 是
+      value: 1
+    - name : 否
+      value : 0
+spring:
+  profiles:
+    active: dev
+  application:
+    name: AppAutoConfigure
+  main:
+    web-application-type: none
