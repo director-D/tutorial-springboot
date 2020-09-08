@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.director.d</groupId>
+    <artifactId>tutorial-springboot</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>auto-configure</module>
+        <module>boot-extension</module>
+        <module>boot-servlet</module>
+        <module>original-servlet</module>
+        <module>boot-webmvc</module>
+        <module>boot-rest</module>
+        <module>boot-view</module>
+        <module>original-webmvc</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <name>tutorial-springboot</name>
+    <description>This is an archive file after learning Springboot</description>
+
+    <properties>
+        <!-- 全局参数 -->
+        <global.encoding>UTF-8</global.encoding>
+        <global.jdk.version>1.8</global.jdk.version>
+        <jupiter.iface.version>0.1.0-RELEASE</jupiter.iface.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <!-- 插件版本 -->
+        <plugin.compiler.version>3.5.1</plugin.compiler.version>
+        <plugin.source.version>3.0.0</plugin.source.version>
+        <plugin.javadoc.version>2.9.1</plugin.javadoc.version>
+        <plugin.deploy.version>2.8.2</plugin.deploy.version>
+        <plugin.staging.version>1.6.7</plugin.staging.version>
+        <plugin.surefire.version>2.9</plugin.surefire.version>
+        <plugin.findbugs.version>3.0.3</plugin.findbugs.version>
+    </properties>
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>    <!-- 编译插件 -->
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${plugin.compiler.version}</version>
+                    <configuration>
+                        <source>${global.jdk.version}</source>
+                        <target>${global.jdk.version}</target>
+                        <encoding>${global.encoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>    <!-- 源码插件 -->
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${plugin.source.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>    <!-- java doc插件 -->
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${plugin.javadoc.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <additionalparam>-Xdoclint:none</additionalparam>
+                        <encoding>${global.encoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>    <!-- deploy插件 -->
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${plugin.deploy.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>    <!-- release插件，用于自动release（暂时无用） -->
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>${plugin.staging.version}</version>
+                    <executions>
+                        <execution>
+                            <id>nexus-deploy</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>deploy</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>    <!-- surefire插件，代码检查 -->
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${plugin.surefire.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.surefire</groupId>
+                            <artifactId>surefire-junit47</artifactId>
+                            <version>${plugin.surefire.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>    <!-- findbugs插件，代码检查 -->
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>${plugin.findbugs.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>    <!-- release插件，release脚本中会使用 -->
+                    <artifactId>maven-release-plugin</artifactId>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <preparationGoals>clean install</preparationGoals>
+                    </configuration>
+                </plugin>
+                <!-- <plugin> -->
+                <!-- <groupId>org.springframework.boot</groupId> &lt;!&ndash; sprint
+                    boot构建插件 &ndash;&gt; -->
+                <!-- <artifactId>spring-boot-maven-plugin</artifactId> -->
+                <!-- <executions> -->
+                <!-- <execution> -->
+                <!-- <goals> -->
+                <!-- <goal>repackage</goal> -->
+                <!-- </goals> -->
+                <!-- </execution> -->
+                <!-- </executions> -->
+                <!-- </plugin> -->
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>2.0.2.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <!--<snapshotRepository>
+            <id>archjava</id>
+            <url>${nexus.url}/content/repositories/carkey-archjava-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>archjava</id>
+            <url>${nexus.url}/content/repositories/carkey-archjava-release/</url>
+        </repository>-->
+    </distributionManagement>
+
+
+</project>
