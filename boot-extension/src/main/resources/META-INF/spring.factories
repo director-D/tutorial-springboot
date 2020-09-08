@@ -1,0 +1,12 @@
+
+org.springframework.context.ApplicationContextInitializer=\
+com.director.repo.context.AfterHelloWorldApplicationContextInitializer,\
+com.director.repo.context.HelloWorldApplicationContextInitializer
+
+org.springframework.context.ApplicationListener=\
+com.director.repo.listener.AfterHelloWorldApplicationListener,\
+com.director.repo.listener.HelloWorldApplicationListener,\
+com.director.repo.listener.BeforeConfigFileApplicationListener
+
+org.springframework.boot.SpringApplicationRunListener=\
+com.director.repo.run.HelloWorldRunListener
