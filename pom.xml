@@ -13,10 +13,24 @@
         <module>boot-servlet</module>
         <module>original-servlet</module>
         <module>boot-webmvc</module>
-        <module>boot-rest</module>
         <module>boot-view</module>
         <module>original-webmvc</module>
+        <module>boot-rest</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.2.7.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.2.7.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
     <packaging>pom</packaging>
 
     <name>tutorial-springboot</name>
@@ -164,11 +178,11 @@
     <distributionManagement>
         <!--<snapshotRepository>
             <id>archjava</id>
-            <url>${nexus.url}/content/repositories/carkey-archjava-snapshots/</url>
+            <url>${nexus.url}/content/repositories/d-snapshots/</url>
         </snapshotRepository>
         <repository>
             <id>archjava</id>
-            <url>${nexus.url}/content/repositories/carkey-archjava-release/</url>
+            <url>${nexus.url}/content/repositories/d-release/</url>
         </repository>-->
     </distributionManagement>
 
