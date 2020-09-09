@@ -15,7 +15,6 @@
         <module>boot-webmvc</module>
         <module>boot-view</module>
         <module>original-webmvc</module>
-        <module>boot-rest</module>
     </modules>
     <dependencies>
         <dependency>
